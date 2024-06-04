@@ -598,7 +598,7 @@ class MqttClient implements ClientContract
     /**
      * {@inheritDoc}
      */
-    public function loop(bool $allowSleep = true, bool $exitWhenQueuesEmpty = false, int $queueWaitLimit = null): void
+    public function loop(bool $allowSleep = true, bool $exitWhenQueuesEmpty = false, int $queueWaitLimit = null, int $sleepMicroseconds = 100000): void
     {
         $this->logger->debug('Starting client loop to process incoming messages and the resend queue.');
 
@@ -610,7 +610,7 @@ class MqttClient implements ClientContract
                 break;
             }
 
-            $this->loopOnce($loopStartedAt, $allowSleep);
+            $this->loopOnce($loopStartedAt, $allowSleep,$sleepMicroseconds);
 
             // If configured, the loop is exited if all queues are empty or a certain time limit is reached (i.e. retry is aborted).
             // In any case, there may not be any active subscriptions though.
