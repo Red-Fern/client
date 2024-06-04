@@ -122,7 +122,7 @@ interface MqttClient
      * @throws MqttClientException
      * @throws ProtocolViolationException
      */
-    public function loop(bool $allowSleep = true, bool $exitWhenQueuesEmpty = false, ?int $queueWaitLimit = null): void;
+    public function loop(bool $allowSleep = true, bool $exitWhenQueuesEmpty = false, ?int $queueWaitLimit = null, int $sleepMicroseconds = 100000): void;
 
     /**
      * Runs an event loop iteration that handles messages from the server and calls the registered
